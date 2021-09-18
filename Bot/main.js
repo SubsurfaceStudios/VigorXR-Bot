@@ -88,6 +88,8 @@ bot.on('messageCreate', message =>{
 
 function shutdown(channel) {
     channel.send('Bot has been shut down.');
+    console.log("Bot shut down from command.");
+    process.exit(0);
 }
 
 //Credits: Bobrobot1 for helping me out with this bot
