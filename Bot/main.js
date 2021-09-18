@@ -1,6 +1,6 @@
 //Config
 const { channelMention, SlashCommandSubcommandBuilder } = require('@discordjs/builders');
-const { Client, Intents, MessageEmbed, Guild, NewsChannel } = require('discord.js');
+const { Client, Intents, MessageEmbed, Guild } = require('discord.js');
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.DIRECT_MESSAGES] });
 
 //#region Bot Events
