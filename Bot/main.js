@@ -1,6 +1,6 @@
 //Config
 const { channelMention, SlashCommandSubcommandBuilder } = require('@discordjs/builders');
-const { Client, Intents, MessageEmbed, Guild } = require('discord.js');
+const { Client, Intents, MessageEmbed, Guild, Message } = require('discord.js');
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.DIRECT_MESSAGES] });
 
 //#region Bot Events
@@ -34,6 +34,7 @@ bot.on('messageCreate', message =>{
     const command = args.shift().toLowerCase();
     const channel = message.channel;
     const author = message.author;
+    const guild = message.guild;
 
     if(command === 'test') {
         console.log(`$${author.username}#${author.discriminator}: Test Command`);
@@ -81,6 +82,85 @@ bot.on('messageCreate', message =>{
         else {
             owoify(args, channel);
         }
+    } else if(command === 'cock') {
+        message.reply(`Cock is not a funny word, ${author}!`);
+    } else if(command === 'help') {
+        var msg = new MessageEmbed()
+            .setColor('#3c99f0')
+            .setTitle('Help Command')
+            .setURL('https://www.vigorxr.tk')
+            .setDescription('This is the official bot of the Vigor XR discord server, and these are the commands you can use.')
+            .addFields(
+                { name: 'Commands', value: 'v.help - THIS COMMAND \nv.coc - Shows in-game Code Of Conduct \nv.wannachat - Pings PingToChat role and asks to chat \nv.faq - Pulls up frequently asked question and answers. \nv.emote - Gives you a random emote', inline: 'false'},
+                { name: 'Help us out!', value: "This now this bot doesn't have a lot of commands, and you can help solve that issue! \nSubmit your commands via the `!suggest [SUGGESTION]` command in #bot-commands to help us add commands to the bot. \nPlease structure your message like this: `BOT COMMAND: v.announce [MESSAGE]` - sends a command to #annoucements with the message specified in command.", inline: 'false'}
+            )
+            .setFooter('Thank you for contributing! \n  -Vigor Bot Team!');
+
+        channel.send({ embeds: [msg] });
+    } else if(command === 'wannachat') {
+        channel.send(`Hey <@&852250185576874044>! ${message.author} wants to chat! Let's start an interesting conversation.`);
+    } else if(command === 'coc' || command === 'codeofconduct' || command === 'rules') {
+        var msg = new MessageEmbed()
+            .setTitle('Vigor XR Code Of Conduct')
+            .setURL("https://www.vigorxr.tk")
+            .setDescription("This is the Vigor XR Code Of Conduct, the rules for how you can and can't act inside Vigor.")
+            .addFields(
+                {name: 'COC', value: "- Don't be toxic. \n - Stay positive! \n - Don't be NSFW or sexual. \n - Don't modify the game without direct permission from the developers. \n - Please report any bugs you find! \n - Pulling game files is permitted, but only for non-commerical and entirely non- malicious purposes. \n - You are permitted to show footage and reviews of the beta on any social platform, though you are not allowed to re host the beta files on ANY platform without written consent from the Vigor XR development and moderation team.", inline: "false"}
+            )
+            .setFooter("Please abide by these rules at all times when playing Vigor. Failure to do so may result in moderation action.");
+        
+        channel.send({embeds: [msg]});
+    } else if(command === 'tos') {
+        var msg = new MessageEmbed()
+            .setTitle('Vigor XR Terms Of Service')
+            .setURL('https://www.vigorxr.tk')
+            .setDescription('The Vigor XR Terms Of Service are the legal rules that you agree to upon downloading or playing the game. They are as follows:')
+            .addFields(
+                {
+                    name: '1.0 - Usage',
+                    value: `
+                        By downloading Vigor XR (henceforth referred to as Vigor XR, Vigor, the Service, or VXR), you accept that you have read and fully understand these terms and conditions, and accept that any violation of them will result in suspension of your usage of the Service, or in very extreme cases, legal action or litigation against your person.
+
+
+                        You also agree that Vigor XR and its development and moderation team may, at any time, with or without reason, permanently revoke your access and usage of the Service.
+                    `,
+                    inline: false
+                },
+                {
+                    name: '1.1 - Code Of Conduct',
+                    value: `
+                    By using the Service and creating an account in Vigor, you agree to the Code Of Conduct, described both here and in-game. In the event you breach the Code Of Conduct, you understand that your usage of the Service may be suspended either temporarily or permanently, with or without any prior warning, written or otherwise.
+
+                    The Vigor Code Of Conduct can be found using the v.coc, v.codeofconduct, or v.rules command.
+
+                    Violation of the above Code Of Conduct will result in suspension, temporary or permanent, of your rights to use the Service.
+                `,
+                    inline: false
+                },
+                {
+                    name: '1.2 - Content Creation',
+                    value: `
+                        Vigor XR contains multiple features that cater to creative users, allowing them to create virtual worlds for other users to view and experience. Abuse of these features, as specified here or otherwise, will result in suspension of your usage of the Service. 
+                        Vigor XR Creator Code Of Conduct
+                        
+                        -NO SEXUAL CONTENT WHATSOEVER.
+                        -Do not create experiences or objects intended to damage another user's hardware or software in any way.
+                        -Do not intentionally create experiences that trigger motion sickness beyond a reasonable degree. (NOTE: "a reasonable degree" is a vague term and in the end, all moderation decisions are performed at Moderator and Developer discretion. Vigor XR does not and can not guarantee completely consistent moderation across all platforms and users.)
+                        -Do not create experiences designed to damage another user's reputation (in-game or in real life).
+                    `,
+                    inline: false
+                },
+                {
+                    name: 'Full Terms',
+                    value: `
+                        You can find the full terms and conditions at https://sites.google.com/view/vigor-xr/TOS.
+                    `,
+                    inline: false
+                }
+            )
+            .setFooter('Thank you for reading these terms, and have a nice day.');
+
+            channel.send({ embeds: [msg]});
     } else {
         console.log(`$${author.username}#${author.discriminator}: No Command`);
         channel.send('Command does not exist!');
