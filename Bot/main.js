@@ -72,8 +72,7 @@ bot.on('messageCreate', message =>{
             channel.send(`Emote ${args[0]}: ${emoteArray[args[0]]}`);
 
     } else if(command === 'shutdown' && message.member.roles.cache.has('812976292634427394')) {
-        console.log(`$${author.username}#${author.discriminator}: Shutdown Command`);
-        shutdown(channel);
+        shutdown(channel, message);
     } else if(command === "owoify") {
         console.log(`$${author.username}#${author.discriminator}: owoify Command`);
         if(args[0] == null) {
@@ -161,6 +160,21 @@ bot.on('messageCreate', message =>{
             .setFooter('Thank you for reading these terms, and have a nice day.');
 
             channel.send({ embeds: [msg]});
+    } else if(command === 'uptime') {
+        function format(seconds){
+            function pad(s){
+              return (s < 10 ? '0' : '') + s;
+            }
+            var hours = Math.floor(seconds / (60*60));
+            var minutes = Math.floor(seconds % (60*60) / 60);
+            var seconds = Math.floor(seconds % 60);
+          
+            return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+        }
+        var uptime = process.uptime();
+        
+        channel.send(`Bot uptime is ${format(uptime)}`);
+
     } else {
         console.log(`$${author.username}#${author.discriminator}: No Command`);
         channel.send('Command does not exist!');
@@ -168,10 +182,13 @@ bot.on('messageCreate', message =>{
     }});
 //#endregion
 
-function shutdown(channel) {
-    channel.send('Bot has been shut down.');
-    console.log("Bot shut down from command.");
-    process.exit(0);
+function shutdown(channel, message) {
+    message.reply('Action confirmed. Shutting down.')
+        .then(() => {
+            console.log(`$${author.username}#${author.discriminator}: Shutdown Command`);
+            console.log("Bot shut down from command.");
+            process.exit(0);
+        });
 }
 
 //Credits: Bobrobot1 for helping me out with this bot
