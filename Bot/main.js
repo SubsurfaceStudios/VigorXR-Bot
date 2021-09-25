@@ -185,7 +185,7 @@ bot.on('messageCreate', message =>{
 function shutdown(channel, message) {
     message.reply('Action confirmed. Shutting down.')
         .then(() => {
-            console.log(`$${author.username}#${author.discriminator}: Shutdown Command`);
+            console.log(`$${message.author.username}#${message.author.discriminator}: Shutdown Command`);
             console.log("Bot shut down from command.");
             process.exit(0);
         });
