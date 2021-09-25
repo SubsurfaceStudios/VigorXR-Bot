@@ -1,6 +1,6 @@
 //Config
 const { channelMention, SlashCommandSubcommandBuilder } = require('@discordjs/builders');
-const { Client, Intents, MessageEmbed, Guild, Message } = require('discord.js');
+const { Client, Intents, MessageEmbed, Guild, Message, MessageActionRow, MessageButton } = require('discord.js');
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.DIRECT_MESSAGES] });
 
 //#region Bot Events
@@ -72,7 +72,19 @@ bot.on('messageCreate', message =>{
             channel.send(`Emote ${args[0]}: ${emoteArray[args[0]]}`);
 
     } else if(command === 'shutdown' && message.member.roles.cache.has('812976292634427394')) {
-        shutdown(channel, message);
+        const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+                .setCustomId('ShutdownConfirm')
+                .setLabel('CONFIRM')
+                .setStyle('DANGER'),
+            new MessageButton()
+                .setCustomId('ShutdownCancel')
+                .setLabel('CANCEL')
+                .setStyle('PRIMARY')
+        );
+
+        message.reply({content: 'Are you sure you want to shut down the bot?', components: [row]});
     } else if(command === "owoify") {
         console.log(`$${author.username}#${author.discriminator}: owoify Command`);
         if(args[0] == null) {
@@ -182,11 +194,27 @@ bot.on('messageCreate', message =>{
     }});
 //#endregion
 
+//Buttons
+bot.on('interactionCreate', interaction => {
+	if (!interaction.isButton()) return;
+	
+    if(interaction.customId == "ShutdownConfirm")
+    {
+        shutdown(interaction.channel, interaction.message);
+    }
+    else if(interaction.customId == "ShutdownCancel")
+    {
+        interaction.channel.send({content: "Shutdown cancelled."});
+        interaction.message.delete(0);
+    }
+});
+
 function shutdown(channel, message) {
-    message.reply('Action confirmed. Shutting down.')
-        .then(() => {
-            console.log(`$${message.author.username}#${message.author.discriminator}: Shutdown Command`);
-            console.log("Bot shut down from command.");
+    channel.send({content: "Understood. Shutting down."})
+        .then(async function () {
+            await bot.user.setPresence({ status: 'invisible'});
+            await message.delete(0);
+            await console.log("Bot shut down from command.");
             process.exit(0);
         });
 }
