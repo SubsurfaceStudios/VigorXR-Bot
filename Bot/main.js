@@ -172,6 +172,9 @@ bot.on('messageCreate', message =>{
             .setFooter('Thank you for reading these terms, and have a nice day.');
 
             channel.send({ embeds: [msg]});
+    } else if(command === 'dingus') {
+        message.reply('`"Dingus"` \n -Bobrobot1, 2021');
+        message.react('<:walter:861823318515908609>');
     } else if(command === 'uptime') {
         function format(seconds){
             function pad(s){
