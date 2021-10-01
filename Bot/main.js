@@ -27,7 +27,7 @@ const token = require("./token.json");
 const pref = config.Prefix;
 
 //#region Command Handling
-bot.on('messageCreate', message =>{
+bot.on('messageCreate', message => {
     if(!message.content.startsWith(pref) || message.author.bot) return;
 
     const args = message.content.slice(pref.length).split(/ +/);
@@ -190,6 +190,27 @@ bot.on('messageCreate', message =>{
         
         channel.send(`Bot uptime is ${format(uptime)}`);
 
+    } else if(command === 'ticket') { 
+            message.guild.channels.create(`SupportTicket-${Date.now()}-${message.author.username}`, {
+                type: 'GUILD_TEXT',
+                permissionOverwrites: [
+                    {
+                       id: message.guild.id,
+                       deny: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY']
+                    },
+                    {
+                        id: '839602150396133416',
+                        allow: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY']
+                    },
+                    {
+                        id: message.author.id,
+                        allow: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY']
+                    }
+                ],
+            }).then( (ticketChannel) => {
+                ticketChannel.setParent("893302079211323412");
+                ticketChannel.send(`${message.author}, please tell us your problem and we will do our best to fix it.`);
+            })
     } else {
         console.log(`$${author.username}#${author.discriminator}: No Command`);
         channel.send('Command does not exist!');
