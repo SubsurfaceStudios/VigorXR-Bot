@@ -28,7 +28,22 @@ const pref = config.Prefix;
 
 //#region Command Handling
 bot.on('messageCreate', message => {
-    if(!message.content.startsWith(pref) || message.author.bot) return;
+    if(message.author.bot) return;
+    if(!message.content.startsWith(pref))
+    {
+        if(
+            message.content.includes("sus") ||
+            message.content.includes("amogus") ||
+            message.content.includes("among us") ||
+            message.content.includes("sussy") ||
+            message.content.includes("baka") ||
+            message.content.includes("imposter") ||
+            message.content.includes("amog us")
+        ) {
+            return message.reply("https://cdn.discordapp.com/attachments/814904970330636318/896446025731022918/video0.mp4");
+        }
+        else return;
+    }
 
     const args = message.content.slice(pref.length).split(/ +/);
     const command = args.shift().toLowerCase();
