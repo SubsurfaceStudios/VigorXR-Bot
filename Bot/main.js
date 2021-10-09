@@ -40,7 +40,7 @@ bot.on('messageCreate', message => {
             message.content.includes("imposter") ||
             message.content.includes("amog us")
         ) {
-            return message.reply("https://cdn.discordapp.com/attachments/814904970330636318/896446025731022918/video0.mp4");
+            return message.author.send("https://cdn.discordapp.com/attachments/814904970330636318/896446025731022918/video0.mp4");
         }
         else return;
     }
