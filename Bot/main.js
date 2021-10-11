@@ -227,7 +227,7 @@ bot.on('messageCreate', message => {
                 ticketChannel.send(`${message.author}, please tell us your problem and we will do our best to fix it.`);
             })
     } else if(command === 'kickmyballs') {
-        message.reply("🎊 🦶");
+        message.author.send("🎊 🦶");
     } else {
         console.log(`$${author.username}#${author.discriminator}: No Command`);
         channel.send('Command does not exist!');
