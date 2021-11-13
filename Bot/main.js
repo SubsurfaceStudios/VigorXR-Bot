@@ -1,7 +1,7 @@
 //Config
 const { channelMention, SlashCommandSubcommandBuilder } = require('@discordjs/builders');
 const { Client, Intents, MessageEmbed, Guild, Message, MessageActionRow, MessageButton } = require('discord.js');
-const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.DIRECT_MESSAGES] });
+const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
 
 //#region Bot Events
 bot.once('ready', () => {
@@ -248,6 +248,12 @@ bot.on('interactionCreate', interaction => {
         interaction.channel.send({content: "Shutdown cancelled."});
         interaction.message.delete(0);
     }
+});
+
+bot.on('guildMemberAdd', member => {
+    console.log('User ' + member.user.username + ' has joined the server!')
+    var role = member.guild.roles.cache.find(role => role.name === 'Member');
+    member.roles.add(role)
 });
 
 function shutdown(channel, message) {
