@@ -131,7 +131,7 @@ bot.on('messageCreate', message => {
             .setURL("https://www.compensationvr.tk")
             .setDescription("This is the Compensation VR Code Of Conduct, the rules for how you can and can't act inside CVR.")
             .addFields(
-                {name: 'COC', value: "- Don't be toxic. \n - Stay positive! \n - Don't be NSFW or sexual. \n - Don't modify the game without direct permission from the developers. \n - Please report any bugs you find! \n - Pulling game files is permitted, but only for non-commerical and entirely non- malicious purposes. \n - You are permitted to show footage and reviews of the beta on any social platform, though you are not allowed to re host the beta files on ANY platform without written consent from the Vigor XR development and moderation team.", inline: "false"}
+                {name: 'COC', value: "- Don't be toxic. \n - Stay positive! \n - Don't be NSFW or sexual. \n - Don't modify the game without direct permission from the developers. \n - Please report any bugs you find! \n - Pulling game files is permitted, but only for non-commerical and entirely non- malicious purposes. \n - You are permitted to show footage and reviews of the beta on any social platform, though you are not allowed to re host the beta files on ANY platform without written consent from the Subsurface Studios development and moderation team.", inline: "false"}
             )
             .setFooter("Please abide by these rules at all times when playing Compensation VR. Failure to do so may result in moderation action.");
         
