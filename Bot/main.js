@@ -140,7 +140,7 @@ bot.on('messageCreate', message => {
         var msg = new MessageEmbed()
             .setTitle('Compensation VR Terms Of Service')
             .setURL('https://www.compensationvr.tk/TOS')
-            .setDescription('The Vigor XR Terms Of Service are the legal rules that you agree to upon downloading or playing the game. They are as follows:')
+            .setDescription('The Compensation VR Terms Of Service are the legal rules that you agree to upon downloading or playing the game. They are as follows:')
             .addFields(
                 {
                     name: 'Link',
