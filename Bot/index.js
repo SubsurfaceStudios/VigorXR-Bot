@@ -13,4 +13,3 @@ require("./handler")(client.application);
 
 // Global Variables
 client.application.commands = new Collection();
-client.application.slashCommands = new Collection();
