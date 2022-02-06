@@ -6,10 +6,10 @@ const client = new Client({
 });
 module.exports = client;
 
+client.login(config.token);
+
 // Global Variables
 client.application.commands.set(new Collection());
 
 // Initializing the project
 require("./handler")(client);
-
-client.login(config.token);
