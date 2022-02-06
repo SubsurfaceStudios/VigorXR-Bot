@@ -8,7 +8,7 @@ module.exports = client.application;
 // Initializing the project
 require("./handler")(client.application);
 
-client.application.login(client.application.config.token);
+client.login(client.application.config.token);
 
 // Global Variables
 client.application.commands = new Collection();
