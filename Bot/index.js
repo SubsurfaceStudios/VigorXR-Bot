@@ -6,9 +6,9 @@ const client = new Client({
 module.exports = client;
 
 // Global Variables
-client.commands = new Collection();
-client.slashCommands = new Collection();
-client.config = require("./config.json");
+client.application.commands = new Collection();
+client.application.slashCommands = new Collection();
+client.application.config = require("./config.json");
 
 // Initializing the project
 require("./handler")(client);
