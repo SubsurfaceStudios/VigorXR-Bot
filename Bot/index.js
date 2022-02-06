@@ -4,12 +4,12 @@ const config = require('./config.json');
 const client = new Client({
     intents: 32767,
 });
+client.login(config.token);
 module.exports = client.application;
 
 // Initializing the project
 require("./handler")(client.application);
 
-client.login(config.token);
 
 // Global Variables
 client.application.commands = new Collection();
