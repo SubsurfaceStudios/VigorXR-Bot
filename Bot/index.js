@@ -1,15 +1,16 @@
 const { Client, Collection, MessageEmbed } = require("discord.js");
-const config = require('./config.json');
 
 const client = new Client({
     intents: 32767,
 });
-client.login(config.token);
-module.exports = client.application;
-
-// Initializing the project
-require("./handler")(client.application);
-
+module.exports = client;
 
 // Global Variables
-client.application.commands = new Collection();
+client.commands = new Collection();
+client.slashCommands = new Collection();
+client.config = require("./config.json");
+
+// Initializing the project
+require("./handler")(client);
+
+client.login(client.config.token);
