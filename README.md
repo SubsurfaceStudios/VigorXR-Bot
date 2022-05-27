@@ -1,4 +1,4 @@
-# Welcome to VigorBot!
+# This repository is now archived. For the current version of the Compensation Bot, please see [this repository](https://github.com/SubsurfaceStudios/Compensation-Bot-V2).
 
-This is the offical bot for the VigorXR Discord and contains a config.js and full code.
-Enjoy!
+
+# Vigor XR Bot
